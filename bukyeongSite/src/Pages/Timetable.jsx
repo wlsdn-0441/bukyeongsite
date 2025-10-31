@@ -1,31 +1,72 @@
+// src/Pages/Timetable.jsx
+import { useNavigate } from 'react-router-dom';
 import Card from '../components/common/Card';
 
-function Timetable() {
-  const WEEKDAYS = ['월', '화', '수', '목', '금'];
+const Timetable = () => {
+  const navigate = useNavigate();
   
-  const timetable = [
-    ['국어', '수학', '영어', '과학', '체육', '음악', '미술'],
-    ['영어', '국어', '수학', '사회', '과학', '체육', '자습'],
-    ['수학', '영어', '국어', '체육', '음악', '과학', '사회'],
-    ['과학', '사회', '영어', '국어', '수학', '미술', '자습'],
-    ['체육', '음악', '수학', '영어', '국어', '과학', '사회']
+  const weekSchedule = {
+    monday: [
+      { time: '09:00 - 10:00', subject: '수학', teacher: '김선생님', room: '201' },
+      { time: '10:00 - 11:00', subject: '영어', teacher: '이선생님', room: '202' },
+      { time: '11:00 - 12:00', subject: '과학', teacher: '박선생님', room: '실험실' },
+      { time: '13:00 - 14:00', subject: '체육', teacher: '최선생님', room: '운동장' },
+    ],
+    tuesday: [
+      { time: '09:00 - 10:00', subject: '국어', teacher: '정선생님', room: '201' },
+      { time: '10:00 - 11:00', subject: '수학', teacher: '김선생님', room: '201' },
+      { time: '11:00 - 12:00', subject: '음악', teacher: '송선생님', room: '음악실' },
+      { time: '13:00 - 14:00', subject: '미술', teacher: '강선생님', room: '미술실' },
+    ],
+    // ... 나머지 요일
+  };
+  
+  const days = [
+    { key: 'monday', label: '월요일' },
+    { key: 'tuesday', label: '화요일' },
+    { key: 'wednesday', label: '수요일' },
+    { key: 'thursday', label: '목요일' },
+    { key: 'friday', label: '금요일' },
   ];
-
+  
   return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-gray-800">📖 시간표</h1>
-
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-        {WEEKDAYS.map((day, dayIdx) => (
-          <Card key={day}>
-            <h3 className="text-lg font-bold mb-4 text-center text-indigo-600">
-              {day}요일
-            </h3>
-            <div className="space-y-2">
-              {timetable[dayIdx].map((subject, idx) => (
-                <div key={idx} className="p-2 bg-gray-50 rounded text-center text-sm">
-                  <div className="font-semibold">{idx + 1}교시</div>
-                  <div className="text-gray-600">{subject}</div>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <button 
+        onClick={() => navigate('/')}
+        className="mb-6 flex items-center text-blue-600 hover:underline"
+      >
+        ← 홈으로 돌아가기
+      </button>
+      
+      <h1 className="text-3xl font-bold text-gray-900 mb-8">
+        이번 주 시간표
+      </h1>
+      
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {days.map((day) => (
+          <Card key={day.key} title={day.label}>
+            <div className="space-y-3">
+              {weekSchedule[day.key]?.map((item, index) => (
+                <div 
+                  key={index}
+                  className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+                >
+                  <div className="flex-1">
+                    <p className="font-semibold text-gray-800 text-lg">
+                      {item.subject}
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      {item.time}
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-sm text-gray-600 bg-blue-100 px-3 py-1 rounded-full">
+                      {item.teacher}
+                    </span>
+                    <p className="text-xs text-gray-500 mt-1">
+                      {item.room}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -34,6 +75,6 @@ function Timetable() {
       </div>
     </div>
   );
-}
+};
 
 export default Timetable;

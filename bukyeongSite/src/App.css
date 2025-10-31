@@ -1,3 +1,9 @@
+/* tailwindcss base; */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 /* index.css */
 :root[data-theme="light"] {
   --bg-color: #ffffff;
@@ -15,4 +21,48 @@ body {
   color: var(--text-color);
   transition: background-color 0.3s, color 0.3s;
   min-height: 100vh;
+}
+
+
+/* 카드형식 CSS */
+/* 카드 컨테이너: 카드를 중앙에 배치하기 위함 */
+.card-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* 🌟 카드 본체 스타일 */
+.card {
+    /* 카드 영역을 시각적으로 구분하는 최소한의 스타일 */
+    width: 100%;
+    max-width: 400px; /* 카드 최대 폭 지정 */
+    border: 1px solid #ccc; /* 얇은 테두리 */
+    border-radius: 5px; /* 약간의 둥근 모서리 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 은은한 그림자 */
+    background-color: white;
+}
+
+/* 카드 헤더/본문/푸터: 내용과 배경을 구분하는 패딩만 적용 */
+.card-header, .card-body, .card-footer {
+    padding: 15px;
+}
+
+/* 제목 기본 스타일 */
+.card-header h2 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+/* 미디어 영역: 이미지가 카드 폭에 맞게 조정되도록 합니다. */
+.card-media img {
+    width: 100%;
+    display: block;
+    height: auto;
+}
+
+/* 버튼 기본 스타일 */
+.card-footer button {
+    padding: 8px 15px;
+    cursor: pointer;
 }
