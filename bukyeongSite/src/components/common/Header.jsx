@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { ThemeToggle } from "./ThemeContext";
+import './Header.css';
 
 const Header = () => {
   const location = useLocation();
@@ -12,32 +13,31 @@ const Header = () => {
   ];
   
   return (
-    <header className="bg-gray-100 shadow-md">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex">
-            <Link to="/" className="flex items-center">
-              <h1 className="text-xl font-bold text-gray-800">
+    <header className="header">
+      <nav className="nav-container">
+        <div className="nav-wrapper">
+          <div className="logo-container">
+            <Link to="/" className="logo-link">
+              <h1 className="logo-title">
                 부경 학교
               </h1>
             </Link>
           </div>
-          {/* 다크/라이트 모드 토글 버튼 및 네비게이션 링크 */}
-          <ThemeToggle />
-          <div className="flex space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors
-                  ${location.pathname === item.path
-                    ? 'border-blue-500 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                  }`}
-              >
-                {item.label}
-              </Link>
-            ))}
+          
+          <div className="nav-right">
+            <div className="nav-links">
+              {navItems.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`nav-link ${location.pathname === item.path ? 'active' : ''}`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+            
+            <ThemeToggle />
           </div>
         </div>
       </nav>

@@ -1,5 +1,6 @@
 // src/components/common/Card.jsx
 import { memo } from 'react';
+import './Card.css';
 
 const Card = memo(({ 
   title, 
@@ -7,16 +8,14 @@ const Card = memo(({
   className = '',
   footer,
   onClick,
-  isClickable = false 
+  isClickable = false,
+  avatar,
+  subtitle,
+  headerAction
 }) => {
   return (
     <article 
-      className={`
-        bg-white rounded-lg shadow-md hover:shadow-lg 
-        transition-all duration-300
-        ${isClickable ? 'cursor-pointer hover:scale-105' : ''}
-        ${className}
-      `}
+      className={`card ${isClickable ? 'card-clickable' : ''} ${className}`}
       onClick={onClick}
       role={isClickable ? 'button' : 'article'}
       tabIndex={isClickable ? 0 : -1}
@@ -28,17 +27,36 @@ const Card = memo(({
       } : undefined}
     >
       {title && (
-        <header className="border-b border-gray-200 px-6 py-4">
-          <h2 className="text-xl font-bold text-gray-800">{title}</h2>
+        <header className="card-header">
+          <div className="card-header-content">
+            {avatar && (
+              <div className="card-avatar">
+                {typeof avatar === 'string' ? (
+                  <img src={avatar} alt="" className="card-avatar-img" />
+                ) : (
+                  avatar
+                )}
+              </div>
+            )}
+            <div className="card-title-group">
+              <h2 className="card-title">{title}</h2>
+              {subtitle && <p className="card-subtitle">{subtitle}</p>}
+            </div>
+          </div>
+          {headerAction && (
+            <div className="card-header-action">
+              {headerAction}
+            </div>
+          )}
         </header>
       )}
       
-      <section className="p-6">
+      <section className="card-body">
         {children}
       </section>
       
       {footer && (
-        <footer className="border-t border-gray-200 px-6 py-4 bg-gray-50">
+        <footer className="card-footer">
           {footer}
         </footer>
       )}
@@ -48,4 +66,4 @@ const Card = memo(({
 
 Card.displayName = 'Card';
 
-export default Card;  // ← 이것도 확인
+export default Card;

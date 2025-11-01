@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 
 // 카드 및 다른 ui개발후 다크모드 라이트모드 구현 (뒤로 미룸)
 // APP.jsx 파일을 APP.css파일로 모두다 꾸며서 변경함
-//직접적으로 아예 바꿈
-
+// 직접적으로 아예 바꿈
 
 function ThemeToggle() {
   // ✅ 1. 초기 테마 설정: localStorage → OS 설정 → 기본값(light)
@@ -42,14 +41,13 @@ function ThemeToggle() {
       <span className="theme-icon" role="img" aria-label={label}>
         {icon}
       </span>
-      <span>{isDark ? "라이트 모드" : "다크 모드"}</span>
+      <span className="theme-label">{isDark ? "라이트" : "다크"}</span>
     </button>
   );
 }
 
 export { ThemeToggle };
 
-
-//컴포넌트 외부에서 불러오려면 {} 로 감싸서 사용합니다.
-//  불러오는 코드 예시 
+// 컴포넌트 외부에서 불러오려면 {} 로 감싸서 사용합니다.
+// 불러오는 코드 예시 
 // import {ThemeToggle} from "../common/ThemeContext";
